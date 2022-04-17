@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 
 class TreeNode:
@@ -20,3 +20,21 @@ def search_bst(root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
             return current
 
     return None
+
+
+def inorder_traversal(root: Optional[TreeNode]) -> List[int]:
+    result = []
+    stack = [(root, False)]
+
+    while stack:
+        (node, visited) = stack.pop()
+
+        if node:
+            if visited:
+                result.append(node.val)
+            else:
+                stack.append((node.right, False))
+                stack.append((node, True))
+                stack.append((node.left, False))
+
+    return result
