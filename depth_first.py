@@ -38,3 +38,24 @@ def inorder_traversal(root: Optional[TreeNode]) -> List[int]:
                 stack.append((node.left, False))
 
     return result
+
+
+def is_valid_bst(root: Optional[TreeNode]) -> bool:
+    max_val = None
+    stack = [(root, False)]
+
+    while stack:
+        (node, visited) = stack.pop()
+
+        if node:
+            if visited:
+                if max_val is None or max_val < node.val:
+                    max_val = node.val
+                else:
+                    return False
+            else:
+                stack.append((node.right, False))
+                stack.append((node, True))
+                stack.append((node.left, False))
+
+    return True
